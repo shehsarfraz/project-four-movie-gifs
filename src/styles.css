@@ -360,7 +360,8 @@ main {
 /* #region - fonts */
 p,
 label,
-input {
+input,
+button {
     font-family: var(--mainTextFont);
     color: var(--purple);
 }

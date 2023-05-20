@@ -4,10 +4,11 @@ function Search() {
         <section class="search-section">
             <div class="wrapper">
                 <div class="search-container">
-                    <div class="input-container">
+                    <form class="input-container">
                         <label for="search">Search Movies</label>
                         <input type="text" id="search" search></input>
-                    </div>
+                        <button>Submit</button>
+                    </form>
                 </div>
             </div>
         </section>
