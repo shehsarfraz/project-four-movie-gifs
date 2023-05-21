@@ -17,24 +17,27 @@ function App() {
   const [keywords, setKeywords] = useState([]);
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    axios({
-      url: 'https://api.themoviedb.org/3/search/movie?',
-      params: {
-        api_key: '9c9519dc449bbf790a84023525a11fe6',
-        query: 'the matrix',
-        language: 'en-US',
-        include_adult: 'false',
-        include_video: 'false',
-        page: 1,
-      },
-    })
-      .then((res) => {
-        const MovieID = res.data.results[0].id;
-        setMovieID(MovieID);
-      });
-  }, []);
+    if (searchValue) {
+      axios({
+        url: 'https://api.themoviedb.org/3/search/movie?',
+        params: {
+          api_key: '9c9519dc449bbf790a84023525a11fe6',
+          query: `${searchValue}`,
+          language: 'en-US',
+          include_adult: 'false',
+          include_video: 'false',
+          page: 1,
+        },
+      })
+        .then((res) => {
+          const MovieID = res.data.results[0].id;
+          setMovieID(MovieID);
+        });
+    }
+  }, [searchValue]);
 
   useEffect(() => {
     if (movieID) {
@@ -105,7 +108,7 @@ function App() {
         <Header />
         <main>
             <GifSection />
-            <Search />
+            <Search onSearch={setSearchValue} />
         </main>
         <Footer />
     </>
