@@ -1,6 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Header from './components/Header';
+import GifSection from './components/GifSection';
+import Search from './components/Search';
+import Footer from './components/Footer';
 
 // TMDB: 9c9519dc449bbf790a84023525a11fe6
 
@@ -97,9 +101,14 @@ function App() {
 
   
   return (
-    <div className="App">
-
-    </div>
+    <>
+        <Header />
+        <main>
+            <GifSection />
+            <Search />
+        </main>
+        <Footer />
+    </>
   );
 }
 
