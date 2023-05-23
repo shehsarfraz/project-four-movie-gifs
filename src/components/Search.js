@@ -30,6 +30,7 @@ function Search({ onSearch }) {
                 id="search"
                 value={searchValue}
                 onChange={handleInputChange}
+                placeholder='Enter a movie'
               />
               <button type="submit">Submit</button>
             </form>
