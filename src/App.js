@@ -110,6 +110,9 @@ function App() {
               altKeyWords={randomKeywords}
             />
             <Search />
+
+            <GifSection />
+            <Search onSearch={setSearchValue} />
         </main>
         <Footer />
     </>
