@@ -85,6 +85,7 @@ function App() {
         );
         const gifUrlsForKeyword = res.data.data.map((gif) => gif.url);
         urls.push(...gifUrlsForKeyword);
+        console.log(res.data);
       }
 
       setGifUrls(urls);
@@ -104,7 +105,10 @@ function App() {
     <>
         <Header />
         <main>
-            <GifSection />
+            <GifSection 
+              gifUrls={gifUrls}
+              altKeyWords={randomKeywords}
+            />
             <Search />
         </main>
         <Footer />

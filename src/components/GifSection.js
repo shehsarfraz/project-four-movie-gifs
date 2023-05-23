@@ -1,16 +1,17 @@
-function GifSection() {
+import Display from "./Display";
+
+function GifSection({gifUrls, altKeyWords}) {
     return (
-        <>
         <section class="gif-section">
             <div class="wrapper">
                 <div class="gif-group-container">
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
+                    <Display 
+                        gifUrls={gifUrls}
+                        gifAlts={altKeyWords}
+                    />
                 </div>
             </div>
-        </section>
-        </>
+        </section> 
     )
 }
 
