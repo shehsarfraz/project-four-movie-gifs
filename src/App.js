@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
@@ -55,8 +54,8 @@ function App() {
         });
       }
     }, [movieID]);
-    
-    
+
+
   useEffect(() => {
     if (keywords.length > 0) {
       const filteredKeywords = keywords.filter(keyword => keyword !== "based on novel or book");
@@ -69,7 +68,7 @@ function App() {
           randomKeywords.push(randomKeyword);
         }
       }
-      
+
         if (randomKeywords.length > 0) {
           console.log(randomKeywords)
         }
@@ -102,7 +101,7 @@ function App() {
     console.log(gifUrls);
   }
 
-  
+
   return (
     <>
         <Header />

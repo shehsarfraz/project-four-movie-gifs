@@ -1,12 +1,12 @@
 function GifSection() {
     return (
         <>
-        <section class="gif-section">
-            <div class="wrapper">
-                <div class="gif-group-container">
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
+        <section className="gif-section">
+            <div className="wrapper">
+                <div className="gif-group-container">
+                    <div className="gif-container"></div>
+                    <div className="gif-container"></div>
+                    <div className="gif-container"></div>
                 </div>
             </div>
         </section>
