@@ -111,6 +111,7 @@ function App() {
             />
             <Search />
 
+
             <GifSection />
             <Search onSearch={setSearchValue} />
         </main>
