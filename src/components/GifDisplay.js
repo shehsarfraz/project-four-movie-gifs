@@ -1,8 +1,9 @@
 const GifDisplay = ({gifUrls}) => {
-    return ( gifUrls.map((indivisualGifUrl) => {
+    return ( 
+        gifUrls.map((individualGifData) => {
         return (
-            <div className="gif-container">
-                <iframe src={indivisualGifUrl} width="100%" height="100%"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            <div className="gif-container" key={individualGifData.id}>
+                <a href={individualGifData.url}><img src={`https://media1.giphy.com/media/${individualGifData.id}/200.gif`} alt={individualGifData.title}/></a>
             </div>
             )
         })

@@ -69,10 +69,6 @@ function App() {
           randomKeywords.push(randomKeyword);
         }
       }
-      
-        if (randomKeywords.length > 0) {
-          console.log(randomKeywords)
-        }
 
       setRandomKeywords(randomKeywords);
     }
@@ -86,10 +82,9 @@ function App() {
         const res = await axios.get(
           `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
         );
-        const gifUrlsForKeyword = res.data.data.map((gif) => gif.embed_url); //res.data.data.map((gif) => gif.url);
+        const gifUrlsForKeyword = res.data.data;
         urls.push(...gifUrlsForKeyword);
       }
-
       setGifUrls(urls);
     };
 
@@ -97,10 +92,6 @@ function App() {
       fetchGifUrls();
     }
   }, [randomKeywords]);
-
-  if (gifUrls.length > 0) {
-    console.log(gifUrls);
-  }
 
   
   return (
