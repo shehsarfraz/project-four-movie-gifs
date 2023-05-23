@@ -1,12 +1,14 @@
-function GifSection() {
+import GifDisplay from "./GifDisplay";
+
+function GifSection({gifUrls}) {
     return (
         <>
         <section class="gif-section">
             <div class="wrapper">
                 <div class="gif-group-container">
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
-                    <div class="gif-container"></div>
+                    <GifDisplay 
+                        gifUrls={gifUrls}
+                    />
                 </div>
             </div>
         </section>

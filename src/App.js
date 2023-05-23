@@ -86,7 +86,7 @@ function App() {
         const res = await axios.get(
           `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
         );
-        const gifUrlsForKeyword = res.data.data.map((gif) => gif.url);
+        const gifUrlsForKeyword = res.data.data.map((gif) => gif.embed_url); //res.data.data.map((gif) => gif.url);
         urls.push(...gifUrlsForKeyword);
       }
 
@@ -107,7 +107,9 @@ function App() {
     <>
         <Header />
         <main>
-            <GifSection />
+            <GifSection 
+              gifUrls={gifUrls}
+            />
             <Search onSearch={setSearchValue} />
         </main>
         <Footer />
