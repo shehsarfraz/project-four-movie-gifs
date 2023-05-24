@@ -311,12 +311,6 @@ figure {
     margin: 0;
 }
 
-img {
-    max-width: 100%;
-    width: auto;
-    height: 100%;
-}
-
 /* #endregion re-set styles */
 
 /* #region - variables */
@@ -536,19 +530,35 @@ button:hover, button:active {
         width: 100%;
         padding: 5px;
     }
-
+    /* input takes up full width of parent */
     .input-container input {
         width: inherit;
     }
 }
 
-@media (max-width: 425px) {
+/* landscape image sizing */
+@media only screen and (orientation: landscape) {
 
-    .gif-container, .gif-container a, .gif-container img {
+    .gif-group-container {
+        min-height: 150px;
+    }
+
+   img {
+       max-width: 100%;
+       width: auto;
+       height: 100%;
+   }
+}
+/* portrait image sizing */
+@media only screen and (orientation: portrait) {
+
+    .gif-container,  .gif-container a {
         width: 100%;
     }
 
-    .gif-container img {
+    img {
+        max-width: 100%;
+        width: 100%;
         height: auto;
     }
 }
