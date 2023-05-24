@@ -362,7 +362,7 @@ main {
     display: flex;
     flex: 1;
     justify-content: space-around;
-    z-index: -1;
+    z-index: 0;
     flex-direction: column;
     justify-content: space-around;
 
@@ -389,6 +389,7 @@ button {
 header {
     background: linear-gradient(to bottom, #1abcf7 0%, var(--whitePink) 60%, #1abcf7 100%);
     height: 16vh;
+    z-index: 1;
 }
 
 .heading-text-container {
