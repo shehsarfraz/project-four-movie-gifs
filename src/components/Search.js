@@ -30,6 +30,7 @@ function Search({ onSearch }) {
                 id="search"
                 value={searchValue}
                 onChange={handleInputChange}
+                placeholder='Enter a movie'
               />
                 <div className="button-container">
                     <button type="submit">Search Movies</button>
