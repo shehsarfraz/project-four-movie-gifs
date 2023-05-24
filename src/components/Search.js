@@ -10,12 +10,14 @@ function Search({ onSearch }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!searchValue) {
+    const trimmedValue = searchValue.trim().toLowerCase();
+
+    if (!trimmedValue) {
       alert('Please enter a search query.');
       return;
     }
 
-    onSearch(searchValue);
+    onSearch(trimmedValue);
   };
 
   return (
@@ -30,7 +32,6 @@ function Search({ onSearch }) {
                 id="search"
                 value={searchValue}
                 onChange={handleInputChange}
-                placeholder='Enter a movie'
               />
                 <div className="button-container">
                     <button type="submit">Search Movies</button>
