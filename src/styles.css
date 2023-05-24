@@ -360,7 +360,7 @@ body {
 
 main {
     display: flex;
-    height: -webkit-fill-available;
+    flex: 1;
     justify-content: space-around;
     z-index: -1;
     flex-direction: column;
@@ -542,8 +542,13 @@ button:hover, button:active {
 }
 
 @media (max-width: 425px) {
-    .gif-container a {
+
+    .gif-container, .gif-container a, .gif-container img {
         width: 100%;
+    }
+
+    .gif-container img {
+        height: auto;
     }
 }
 /* #endregion - media queries */
