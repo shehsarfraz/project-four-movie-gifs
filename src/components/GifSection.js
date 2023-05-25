@@ -1,6 +1,6 @@
 import GifDisplay from "./GifDisplay";
 
-function GifSection({gifUrls}) {
+function GifSection({ gifUrls, message }) {
     return (
         <>
         <section className="gif-section">
@@ -8,7 +8,7 @@ function GifSection({gifUrls}) {
                 <div className="gif-group-container">
                     { (gifUrls.length > 0) ? (<GifDisplay
                         gifUrls={gifUrls}
-                    />) : (<h2>Search movies, get GIFS</h2>)
+                    />) : (<h2>{message}</h2>)
                     }
 
                 </div>
