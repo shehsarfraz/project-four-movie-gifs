@@ -26,14 +26,16 @@ function Search({ onSearch }) {
         <div className="wrapper">
           <div className="search-container">
             <form className="input-container" onSubmit={handleSubmit}>
-              <label htmlFor="search">Search Movies</label>
+              <label className='sr-only' htmlFor="search">Search Movies</label>
               <input
                 type="text"
                 id="search"
                 value={searchValue}
                 onChange={handleInputChange}
               />
-              <button type="submit">Submit</button>
+                <div className="button-container">
+                    <button type="submit">Search Movies</button>
+                </div>
             </form>
           </div>
         </div>

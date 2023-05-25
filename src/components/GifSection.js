@@ -6,11 +6,11 @@ function GifSection({gifUrls}) {
         <section className="gif-section">
             <div className="wrapper">
                 <div className="gif-group-container">
-                    { (gifUrls.length > 0) ? (<GifDisplay 
+                    { (gifUrls.length > 0) ? (<GifDisplay
                         gifUrls={gifUrls}
-                    />) : (<h2>Enter a movie name, and we will summarize in 3 GIFS</h2>)
+                    />) : (<h2>Search movies, get GIFS</h2>)
                     }
-                    
+
                 </div>
             </div>
         </section>

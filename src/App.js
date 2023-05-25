@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
@@ -55,8 +54,8 @@ function App() {
         });
       }
     }, [movieID]);
-    
-    
+
+
   useEffect(() => {
     if (keywords.length > 0) {
       const filteredKeywords = keywords.filter(keyword => keyword !== "based on novel or book");
@@ -93,12 +92,16 @@ function App() {
     }
   }, [randomKeywords]);
 
-  
+  if (gifUrls.length > 0) {
+    console.log(gifUrls);
+  }
+
+
   return (
     <>
         <Header />
         <main>
-            <GifSection 
+            <GifSection
               gifUrls={gifUrls}
             />
             <Search onSearch={setSearchValue} />
