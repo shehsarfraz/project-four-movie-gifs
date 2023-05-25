@@ -311,6 +311,12 @@ figure {
     margin: 0;
 }
 
+img {
+     max-width: 100%;
+     width: auto;
+     height: 100%;
+ }
+
 /* #endregion re-set styles */
 
 /* #region - variables */
@@ -536,23 +542,12 @@ button:hover, button:active {
     }
 }
 
-/* landscape image sizing */
-@media only screen and (orientation: landscape) {
-
+@media (max-width: 575px) {
     .gif-group-container {
         min-height: 150px;
     }
 
-   img {
-       max-width: 100%;
-       width: auto;
-       height: 100%;
-   }
-}
-/* portrait image sizing */
-@media only screen and (orientation: portrait) {
-
-    .gif-container,  .gif-container a {
+    .gif-container, .gif-container a {
         width: 100%;
     }
 
@@ -562,4 +557,5 @@ button:hover, button:active {
         height: auto;
     }
 }
+
 /* #endregion - media queries */
