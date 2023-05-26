@@ -26,9 +26,10 @@ function Search({ setSearchValue, title, setTitle, setMessage, setMovieID, setGi
 
   return (
     <>
-    <h3>{title}</h3>
+
       <section className="search-section">
         <div className="wrapper">
+          <h3>{title}</h3>
           <div className="search-container">
             <form className="input-container" onSubmit={handleSubmit}>
               <label className='sr-only' htmlFor="search">Search Movies</label>
