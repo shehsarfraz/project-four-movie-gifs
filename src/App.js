@@ -95,10 +95,6 @@ function App() {
     }
   }, [randomKeywords]);
 
-  if (gifUrls.length > 0) {
-        <p>Error</p>
-  }
-
   console.log(title);
   return (
     <>

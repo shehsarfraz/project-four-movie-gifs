@@ -1,6 +1,6 @@
 import GifDisplay from "./GifDisplay";
 
-function GifSection({gifUrls, errorMessage}) {
+function GifSection({gifUrls}) {
     return (
         <>
             <section className="gif-section">
