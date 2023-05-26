@@ -17,6 +17,8 @@ function App() {
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
     if (searchValue) {
@@ -34,6 +36,10 @@ function App() {
         .then((res) => {
           const MovieID = res.data.results[0].id;
           setMovieID(MovieID);
+          setTitle(res.data.results[0].original_title);
+        })
+        .catch((error) => {
+          setErrorMessage('Error fetching movie ID. Please try again later.');
         });
     }
   }, [searchValue]);
@@ -50,10 +56,12 @@ function App() {
           const keywords = res.data.keywords;
           const keywordNames = keywords.map(keyword => keyword.name);
           setKeywords(keywordNames);
-
+        })
+        .catch((error) => {
+          setErrorMessage('Error fetching keywords. Please try again later.');
         });
-      }
-    }, [movieID]);
+    }
+  }, [movieID]);
 
 
   useEffect(() => {
@@ -78,11 +86,15 @@ function App() {
       const urls = [];
 
       for (const keyword of randomKeywords) {
-        const res = await axios.get(
-          `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
-        );
-        const gifUrlsForKeyword = res.data.data;
-        urls.push(...gifUrlsForKeyword);
+        try {
+          const res = await axios.get(
+            `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
+          );
+          const gifUrlsForKeyword = res.data.data;
+          urls.push(...gifUrlsForKeyword);
+        } catch (error) {
+          setErrorMessage('Error fetching GIFs. Please try again later.');
+        }
       }
       setGifUrls(urls);
     };
@@ -93,10 +105,10 @@ function App() {
   }, [randomKeywords]);
 
   if (gifUrls.length > 0) {
-    console.log(gifUrls);
+        <p>Error</p>
   }
 
-
+  console.log(title);
   return (
     <>
         <Header />
@@ -104,7 +116,10 @@ function App() {
             <GifSection
               gifUrls={gifUrls}
             />
-            <Search onSearch={setSearchValue} />
+            <Search onSearch={setSearchValue} 
+              title={title}
+              errorMessage={errorMessage}
+            />
         </main>
         <Footer />
     </>

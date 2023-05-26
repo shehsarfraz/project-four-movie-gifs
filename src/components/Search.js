@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Search({ onSearch }) {
+function Search({ onSearch, title }) {
   const [searchValue, setSearchValue] = useState('');
 
   const handleInputChange = (event) => {
@@ -22,6 +22,7 @@ function Search({ onSearch }) {
 
   return (
     <>
+    <h2>{title}</h2>
       <section className="search-section">
         <div className="wrapper">
           <div className="search-container">
