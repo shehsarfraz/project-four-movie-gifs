@@ -1,23 +1,29 @@
 import { useState } from 'react';
 
-function Search({ onSearch }) {
-  const [searchValue, setSearchValue] = useState('');
+function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest }) {
+
+  const [inputValue, setInputValue] = useState('');
+
+  let buttonValue = buttonRequest === 'search' ? 'Search Movies' : 'Refresh GIFs';
 
   const handleInputChange = (event) => {
-    setSearchValue(event.target.value);
+    setInputValue(event.target.value);
+    setButtonRequest('search');
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const trimmedValue = searchValue.trim().toLowerCase();
+    const trimmedValue = inputValue.trim().toLowerCase();
 
     if (!trimmedValue) {
       alert('Please enter a search query.');
       return;
     }
 
-    onSearch(trimmedValue);
+    setSearchValue(trimmedValue);
+    setButtonRequest('refresh');
+    console.log(buttonRequest);
   };
 
   return (
@@ -26,15 +32,15 @@ function Search({ onSearch }) {
         <div className="wrapper">
           <div className="search-container">
             <form className="input-container" onSubmit={handleSubmit}>
-              <label className='sr-only' htmlFor="search">Search Movies</label>
+              <label className='sr-only' htmlFor="search">{buttonValue}</label>
               <input
                 type="text"
                 id="search"
-                value={searchValue}
+                value={inputValue}
                 onChange={handleInputChange}
               />
                 <div className="button-container">
-                    <button type="submit">Search Movies</button>
+                    <button type="submit">{buttonValue}</button>
                 </div>
             </form>
           </div>
