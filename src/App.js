@@ -17,7 +17,6 @@ function App() {
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [title, setTitle] = useState('');
 
   useEffect(() => {
@@ -38,9 +37,6 @@ function App() {
           setMovieID(MovieID);
           setTitle(res.data.results[0].original_title);
         })
-        .catch((error) => {
-          setErrorMessage('Error fetching movie ID. Please try again later.');
-        });
     }
   }, [searchValue]);
 
@@ -57,9 +53,6 @@ function App() {
           const keywordNames = keywords.map(keyword => keyword.name);
           setKeywords(keywordNames);
         })
-        .catch((error) => {
-          setErrorMessage('Error fetching keywords. Please try again later.');
-        });
     }
   }, [movieID]);
 
@@ -92,8 +85,6 @@ function App() {
           );
           const gifUrlsForKeyword = res.data.data;
           urls.push(...gifUrlsForKeyword);
-        } catch (error) {
-          setErrorMessage('Error fetching GIFs. Please try again later.');
         }
       }
       setGifUrls(urls);
