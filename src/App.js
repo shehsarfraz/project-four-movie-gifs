@@ -105,7 +105,6 @@ function App() {
             />
             <Search onSearch={setSearchValue} 
               title={title}
-              errorMessage={errorMessage}
             />
         </main>
         <Footer />
