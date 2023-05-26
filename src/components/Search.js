@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest }) {
+function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest, title, onSearch}) {
 
   const [inputValue, setInputValue] = useState('');
 
@@ -28,6 +28,7 @@ function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest }
 
   return (
     <>
+    <h2>{title}</h2>
       <section className="search-section">
         <div className="wrapper">
           <div className="search-container">

@@ -10,12 +10,10 @@ function GifSection({ gifUrls, message }) {
                         gifUrls={gifUrls}
                     />) : (<h2>{message}</h2>)
                     }
-
                 </div>
-            </div>
-        </section>
+            </section>
         </>
-    )
+    );
 }
 
 export default GifSection;

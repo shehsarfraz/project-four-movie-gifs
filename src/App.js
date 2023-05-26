@@ -17,6 +17,7 @@ function App() {
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [title, setTitle] = useState('');
   const [message, setMessage] = useState('Search movies, get GIFS');
   const [buttonRequest, setButtonRequest] = useState('search');
 
@@ -39,7 +40,10 @@ function App() {
         },
       })
         .then((res) => {
-
+          const MovieID = res.data.results[0].id;
+          setMovieID(MovieID);
+          setTitle(res.data.results[0].original_title);
+        })
             try {
               const movieDataID = res.data.results[0].id;
               setMovieID(movieDataID);
@@ -63,6 +67,11 @@ function App() {
       })
         .then((res) => {
           const keywords = res.data.keywords;
+          const keywordNames = keywords.map(keyword => keyword.name);
+          setKeywords(keywordNames);
+        })
+    }
+  }, [movieID]);
           if (keywords.length > 0) {
               const keywordNames = keywords.map(keyword => keyword.name);
               setKeywords(keywordNames);
@@ -73,7 +82,6 @@ function App() {
         });
       }
     }, [movieID, setMessage]);
-
 
   useEffect(() => {
     if (keywords.length > 0) {
@@ -97,11 +105,13 @@ function App() {
       const urls = [];
 
       for (const keyword of randomKeywords) {
-        const res = await axios.get(
-          `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
-        );
-        const gifUrlsForKeyword = res.data.data;
-        urls.push(...gifUrlsForKeyword);
+        try {
+          const res = await axios.get(
+            `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
+          );
+          const gifUrlsForKeyword = res.data.data;
+          urls.push(...gifUrlsForKeyword);
+        }
       }
       setGifUrls(urls);
     };
@@ -110,6 +120,7 @@ function App() {
       fetchGifUrls();
     }
   }, [randomKeywords]);
+  console.log(title);
 
   return (
     <>
@@ -125,6 +136,10 @@ function App() {
                 buttonRequest={buttonRequest}
                 setButtonRequest={setButtonRequest}
             />
+            <Search onSearch={setSearchValue} 
+              title={title}
+            />
+
         </main>
         <Footer />
     </>
