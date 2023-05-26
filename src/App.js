@@ -18,12 +18,12 @@ function App() {
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [message, setMessage] = useState('Search movies, get GIFS');
-  const [buttonRequest, setButtonRequest] = useState('search');
+  const [buttonRequest, setButtonRequest] = useState(0);
 
   useEffect(() => {
     if (searchValue) {
     // for loading screen
-      setMessage('loading');
+      setMessage('Loading...');
     // empty array
       setGifUrls([]);
 
@@ -52,9 +52,7 @@ function App() {
   }, [searchValue]);
 
   useEffect(() => {
-
     if (movieID) {
-
       axios({
         url: `https://api.themoviedb.org/3/movie/${movieID}/keywords`,
         params: {
@@ -76,6 +74,7 @@ function App() {
 
 
   useEffect(() => {
+    console.log('working');
     if (keywords.length > 0) {
       const filteredKeywords = keywords.filter(keyword => keyword !== "based on novel or book");
 
@@ -90,7 +89,7 @@ function App() {
 
       setRandomKeywords(randomKeywords);
     }
-  }, [keywords]);
+  }, [keywords, buttonRequest]);
 
   useEffect(() => {
     const fetchGifUrls = async () => {
@@ -120,7 +119,6 @@ function App() {
                 message={message}
             />
             <Search
-                searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 buttonRequest={buttonRequest}
                 setButtonRequest={setButtonRequest}

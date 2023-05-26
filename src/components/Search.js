@@ -1,29 +1,32 @@
 import { useState } from 'react';
 
-function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest }) {
+function Search({ setSearchValue, buttonRequest, setButtonRequest }) {
 
   const [inputValue, setInputValue] = useState('');
 
-  let buttonValue = buttonRequest === 'search' ? 'Search Movies' : 'Refresh GIFs';
+//   let buttonValue = buttonRequest === 'search' ? 'Search Movies' : 'Refresh GIFs';
+
+    let buttonValue = buttonRequest === 0 ? 'Search Movies' : 'Refresh GIFs';
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    setButtonRequest('search');
+    setButtonRequest(0);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    setButtonRequest(buttonRequest + 1);
+
     const trimmedValue = inputValue.trim().toLowerCase();
 
-    if (!trimmedValue) {
+    if (!trimmedValue && buttonRequest === 0) {
       alert('Please enter a search query.');
       return;
     }
 
     setSearchValue(trimmedValue);
-    setButtonRequest('refresh');
-    console.log(buttonRequest);
+    setInputValue('');
   };
 
   return (
