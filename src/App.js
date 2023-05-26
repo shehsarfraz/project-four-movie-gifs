@@ -17,10 +17,16 @@ function App() {
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-    const [message, setMessage] = useState('Search movies, get GIFS');
+  const [message, setMessage] = useState('Search movies, get GIFS');
+  const [buttonRequest, setButtonRequest] = useState('search');
 
   useEffect(() => {
     if (searchValue) {
+    // for loading screen
+      setMessage('loading');
+    // empty array
+      setGifUrls([]);
+
       axios({
         url: 'https://api.themoviedb.org/3/search/movie?',
         params: {
@@ -33,14 +39,13 @@ function App() {
         },
       })
         .then((res) => {
+
             try {
-                const MovieID = res.data.results[0].id;
-                setMovieID(MovieID);
+              const movieDataID = res.data.results[0].id;
+              setMovieID(movieDataID);
             }
             catch(err) {
-                setGifUrls([]);
-                setMessage('No results, try again');
-                console.log('error');
+              setMessage('No results, try again');
             }
         });
     }
@@ -58,8 +63,13 @@ function App() {
       })
         .then((res) => {
           const keywords = res.data.keywords;
-          const keywordNames = keywords.map(keyword => keyword.name);
-          setKeywords(keywordNames);
+          if (keywords.length > 0) {
+              const keywordNames = keywords.map(keyword => keyword.name);
+              setKeywords(keywordNames);
+          }else {
+            // shows 'no results' when the movie exists but the keywords don't
+            setMessage('No results, try again');
+          }
         });
       }
     }, [movieID, setMessage]);
@@ -110,7 +120,10 @@ function App() {
                 message={message}
             />
             <Search
-                onSearch={setSearchValue}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                buttonRequest={buttonRequest}
+                setButtonRequest={setButtonRequest}
             />
         </main>
         <Footer />
