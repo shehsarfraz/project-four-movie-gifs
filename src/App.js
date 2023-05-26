@@ -19,7 +19,6 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('Search movies, get GIFS');
-  const [buttonRequest, setButtonRequest] = useState(0);
 
   useEffect(() => {
     if (searchValue) {
@@ -40,12 +39,12 @@ function App() {
         },
       })
         .then((res) => {
-        //   const MovieID = res.data.results[0].id;
-        //   setMovieID(MovieID);
-          setTitle(res.data.results[0].original_title);
+            console.log(res.data.results[0]);
+
             try {
               const movieDataID = res.data.results[0].id;
               setMovieID(movieDataID);
+              setTitle(res.data.results[0].original_title);
             }
             catch(err) {
               setMessage('No results, try again');
@@ -55,6 +54,7 @@ function App() {
   }, [searchValue]);
 
   useEffect(() => {
+
     if (movieID) {
       axios({
         url: `https://api.themoviedb.org/3/movie/${movieID}/keywords`,
@@ -64,11 +64,7 @@ function App() {
       })
         .then((res) => {
           const keywords = res.data.keywords;
-          const keywordNames = keywords.map(keyword => keyword.name);
-          setKeywords(keywordNames);
-        })
-    }
-  }, [movieID]);
+
           if (keywords.length > 0) {
               const keywordNames = keywords.map(keyword => keyword.name);
               setKeywords(keywordNames);
@@ -81,7 +77,7 @@ function App() {
     }, [movieID, setMessage]);
 
   useEffect(() => {
-    console.log('working');
+
     if (keywords.length > 0) {
       const filteredKeywords = keywords.filter(keyword => keyword !== "based on novel or book");
 
@@ -96,21 +92,21 @@ function App() {
 
       setRandomKeywords(randomKeywords);
     }
-  }, [keywords, buttonRequest]);
+  }, [keywords]);
 
   useEffect(() => {
     const fetchGifUrls = async () => {
       const urls = [];
 
       for (const keyword of randomKeywords) {
-        try {
+
           const res = await axios.get(
             `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
           );
           const gifUrlsForKeyword = res.data.data;
           urls.push(...gifUrlsForKeyword);
         }
-      }
+
       setGifUrls(urls);
     };
 
@@ -118,7 +114,6 @@ function App() {
       fetchGifUrls();
     }
   }, [randomKeywords]);
-  console.log(title);
 
   return (
     <>
@@ -130,11 +125,12 @@ function App() {
             />
             <Search
                 setSearchValue={setSearchValue}
-                buttonRequest={buttonRequest}
-                setButtonRequest={setButtonRequest}
                 title={title}
+                setTitle={setTitle}
+                setMessage={setMessage}
+                setMovieID={setMovieID}
+                setGifUrls={setGifUrls}
             />
-
         </main>
         <Footer />
     </>
