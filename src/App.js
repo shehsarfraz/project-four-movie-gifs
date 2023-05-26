@@ -135,9 +135,7 @@ function App() {
                 setSearchValue={setSearchValue}
                 buttonRequest={buttonRequest}
                 setButtonRequest={setButtonRequest}
-            />
-            <Search onSearch={setSearchValue} 
-              title={title}
+                title={title}
             />
 
         </main>
