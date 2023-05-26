@@ -17,10 +17,13 @@ function App() {
   const [randomKeywords, setRandomKeywords] = useState([]);
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-    const [message, setMessage] = useState('Search movies, get GIFS');
+  const [message, setMessage] = useState('Search movies, get GIFS');
 
   useEffect(() => {
     if (searchValue) {
+    // empty array
+      setGifUrls([]);
+
       axios({
         url: 'https://api.themoviedb.org/3/search/movie?',
         params: {
@@ -33,14 +36,15 @@ function App() {
         },
       })
         .then((res) => {
+
             try {
-                const MovieID = res.data.results[0].id;
-                setMovieID(MovieID);
+              console.log(res.data.results);
+              const movieDataID = res.data.results[0].id;
+              setMovieID(movieDataID);
+              console.log(movieDataID);
             }
             catch(err) {
-                setGifUrls([]);
-                setMessage('No results, try again');
-                console.log('error');
+              setMessage('No results, try again');
             }
         });
     }
@@ -49,7 +53,7 @@ function App() {
   useEffect(() => {
 
     if (movieID) {
-
+        console.log(movieID);
       axios({
         url: `https://api.themoviedb.org/3/movie/${movieID}/keywords`,
         params: {
@@ -58,8 +62,13 @@ function App() {
       })
         .then((res) => {
           const keywords = res.data.keywords;
-          const keywordNames = keywords.map(keyword => keyword.name);
-          setKeywords(keywordNames);
+          if (keywords.length > 0) {
+              const keywordNames = keywords.map(keyword => keyword.name);
+              setKeywords(keywordNames);
+          }else {
+            // shows 'no results' when the movie exists but the keywords don't
+            setMessage('No results, try again');
+          }
         });
       }
     }, [movieID, setMessage]);
@@ -79,6 +88,7 @@ function App() {
       }
 
       setRandomKeywords(randomKeywords);
+      console.log(randomKeywords);
     }
   }, [keywords]);
 
@@ -94,6 +104,7 @@ function App() {
         urls.push(...gifUrlsForKeyword);
       }
       setGifUrls(urls);
+      console.log(urls);
     };
 
     if (randomKeywords.length > 0) {
