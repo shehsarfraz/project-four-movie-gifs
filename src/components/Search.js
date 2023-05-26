@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest, title, onSearch}) {
+function Search({ searchValue, setSearchValue, buttonRequest, setButtonRequest, title}) {
 
   const [inputValue, setInputValue] = useState('');
 
