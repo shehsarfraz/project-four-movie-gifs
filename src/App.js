@@ -18,9 +18,16 @@ function App() {
   const [gifUrls, setGifUrls] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('Search movies, get GIFS');
+  const [buttonRequest, setButtonRequest] = useState('search');
 
   useEffect(() => {
     if (searchValue) {
+    // for loading screen
+      setMessage('loading');
+    // empty array
+      setGifUrls([]);
+
       axios({
         url: 'https://api.themoviedb.org/3/search/movie?',
         params: {
@@ -37,11 +44,21 @@ function App() {
           setMovieID(MovieID);
           setTitle(res.data.results[0].original_title);
         })
+            try {
+              const movieDataID = res.data.results[0].id;
+              setMovieID(movieDataID);
+            }
+            catch(err) {
+              setMessage('No results, try again');
+            }
+        });
     }
   }, [searchValue]);
 
   useEffect(() => {
+
     if (movieID) {
+
       axios({
         url: `https://api.themoviedb.org/3/movie/${movieID}/keywords`,
         params: {
@@ -55,7 +72,16 @@ function App() {
         })
     }
   }, [movieID]);
-
+          if (keywords.length > 0) {
+              const keywordNames = keywords.map(keyword => keyword.name);
+              setKeywords(keywordNames);
+          }else {
+            // shows 'no results' when the movie exists but the keywords don't
+            setMessage('No results, try again');
+          }
+        });
+      }
+    }, [movieID, setMessage]);
 
   useEffect(() => {
     if (keywords.length > 0) {
@@ -94,18 +120,26 @@ function App() {
       fetchGifUrls();
     }
   }, [randomKeywords]);
-
   console.log(title);
+
   return (
     <>
         <Header />
         <main>
             <GifSection
-              gifUrls={gifUrls}
+                gifUrls={gifUrls}
+                message={message}
+            />
+            <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                buttonRequest={buttonRequest}
+                setButtonRequest={setButtonRequest}
             />
             <Search onSearch={setSearchValue} 
               title={title}
             />
+
         </main>
         <Footer />
     </>

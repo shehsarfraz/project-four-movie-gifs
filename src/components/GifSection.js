@@ -1,20 +1,15 @@
 import GifDisplay from "./GifDisplay";
 
-function GifSection({gifUrls}) {
+function GifSection({ gifUrls, message }) {
     return (
         <>
-            <section className="gif-section">
-                <div className="wrapper">
-                    <div className="gif-group-container">
-                        {gifUrls.length > 0 ? (
-                            <GifDisplay gifUrls={gifUrls} />
-                        ) : (
-                            <>
-                                <h2>Search movies, get GIFS</h2>
-                                {errorMessage && <p>{errorMessage}</p>}
-                            </>
-                        )}
-                    </div>
+        <section className="gif-section">
+            <div className="wrapper">
+                <div className="gif-group-container">
+                    { (gifUrls.length > 0) ? (<GifDisplay
+                        gifUrls={gifUrls}
+                    />) : (<h2>{message}</h2>)
+                    }
                 </div>
             </section>
         </>
