@@ -397,12 +397,12 @@ header {
 
 h1 {
     font-family: var(--firstAccentFont);
-    font-size: 7vmin;
+    font-size: calc(7vmin + 6px);
 }
 
 h2 {
     font-family: var(--secondAccentFont);
-    font-size: 6vmin;
+    font-size: calc(6vmin + 5px);
 }
 
 h1,
