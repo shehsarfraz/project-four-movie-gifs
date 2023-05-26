@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     if (searchValue) {
     // for loading screen
-      setMessage('loading');
+      setMessage('Loading...');
     // empty array
       setGifUrls([]);
 
@@ -40,10 +40,9 @@ function App() {
         },
       })
         .then((res) => {
-          const MovieID = res.data.results[0].id;
-          setMovieID(MovieID);
+        //   const MovieID = res.data.results[0].id;
+        //   setMovieID(MovieID);
           setTitle(res.data.results[0].original_title);
-        })
             try {
               const movieDataID = res.data.results[0].id;
               setMovieID(movieDataID);
