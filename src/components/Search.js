@@ -26,7 +26,6 @@ function Search({ setSearchValue, title, setTitle, setMessage, setMovieID, setGi
 
   return (
     <>
-
       <section className="search-section">
         <div className="wrapper">
           <h3>{title}</h3>
