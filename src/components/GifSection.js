@@ -3,7 +3,7 @@ import GifDisplay from "./GifDisplay";
 function GifSection({ gifUrls, message }) {
     return (
         <>
-        <section className="gif-section">
+        <section>
             <div className="wrapper">
                 <div className="gif-group-container">
                     { (gifUrls.length > 0) ? (<GifDisplay
@@ -11,7 +11,8 @@ function GifSection({ gifUrls, message }) {
                     />) : (<h2>{message}</h2>)
                     }
                 </div>
-            </section>
+            </div>
+        </section>
         </>
     );
 }
