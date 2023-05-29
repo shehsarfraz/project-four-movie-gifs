@@ -5,12 +5,12 @@ function GifSection({ gifUrls, message }) {
         <>
         <section>
             <div className="wrapper">
-                <div className="gif-group-container">
+                <ul className="gif-group-container">
                     { (gifUrls.length > 0) ? (<GifDisplay
                         gifUrls={gifUrls}
                     />) : (<h2>{message}</h2>)
                     }
-                </div>
+                </ul>
             </div>
         </section>
         </>
