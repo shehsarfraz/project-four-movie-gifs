@@ -1,10 +1,10 @@
-const GifDisplay = ({gifUrls}) => {
+const GifDisplay = ({ gifUrls }) => {
     return (
         gifUrls.map((individualGifData) => {
-        return (
-            <li className="gif-container" key={individualGifData.id}>
-                <a href={individualGifData.url}><img src={`https://media1.giphy.com/media/${individualGifData.id}/200.gif`} alt={individualGifData.title}/></a>
-            </li>
+            return (
+                <li className="gif-container" key={individualGifData.id}>
+                    <a href={individualGifData.url}><img src={`https://media1.giphy.com/media/${individualGifData.id}/200.gif`} alt={individualGifData.title} /></a>
+                </li>
             )
         })
     )
