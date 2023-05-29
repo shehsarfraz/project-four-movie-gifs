@@ -59,7 +59,7 @@ function App() {
                 .then((res) => {
                     const keywords = res.data.keywords;
 
-                    if (keywords.length > 0) {
+                    if (keywords.length >= 3) {
                         const keywordNames = keywords.map(keyword => keyword.name);
                         setKeywords(keywordNames);
                     } else {
@@ -72,7 +72,7 @@ function App() {
 
     useEffect(() => {
 
-        if (keywords.length > 0) {
+        if (keywords.length >= 3) {
             const filteredKeywords = keywords.filter(keyword => keyword !== "based on novel or book");
 
             const randomKeywords = [];
@@ -104,7 +104,7 @@ function App() {
             setGifUrls(urls);
         };
 
-        if (randomKeywords.length > 0) {
+        if (randomKeywords.length >= 3) {
             fetchGifUrls();
         }
     }, [randomKeywords]);

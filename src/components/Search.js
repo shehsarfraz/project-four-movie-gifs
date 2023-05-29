@@ -5,6 +5,7 @@ function Search({ setSearchValue, title, setTitle, setMessage, setMovieID, setGi
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event) => {
+    setSearchValue('');
     setInputValue(event.target.value);
   };
 
