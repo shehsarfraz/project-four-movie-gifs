@@ -34,15 +34,17 @@ function App() {
                 },
             })
                 .then((res) => {
-
+                    // use if here
                     try {
                         const movieDataID = res.data.results[0].id;
                         setMovieID(movieDataID);
                         setTitle(res.data.results[0].title);
                     }
                     catch (err) {
-                        setMessage('No results, try again');
+                        setMessage('No results, try another movie');
                     }
+                }).catch(() => {
+                    setMessage('Failed to fetch movie');
                 });
         }
     }, [searchValue]);
@@ -64,8 +66,10 @@ function App() {
                         setKeywords(keywordNames);
                     } else {
                         // shows 'no results' when the movie exists but the keywords don't
-                        setMessage('No results, try again');
+                        setMessage('No results, try another movie');
                     }
+                }).catch(() => {
+                    setMessage('Failed to fetch keywords');
                 });
         }
     }, [movieID, setMessage]);
@@ -91,17 +95,19 @@ function App() {
     useEffect(() => {
         const fetchGifUrls = async () => {
             const urls = [];
-
-            for (const keyword of randomKeywords) {
-
-                const res = await axios.get(
-                    `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
-                );
-                const gifUrlsForKeyword = res.data.data;
-                urls.push(...gifUrlsForKeyword);
+            try {
+                for (const keyword of randomKeywords) {
+                    const res = await axios.get(
+                        `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
+                    );
+                    const gifUrlsForKeyword = res.data.data;
+                    urls.push(...gifUrlsForKeyword);
+                }
+                setGifUrls(urls);
             }
-
-            setGifUrls(urls);
+            catch {
+                setMessage("Failed to fetch gifs");
+            }
         };
 
         if (randomKeywords.length >= 3) {
