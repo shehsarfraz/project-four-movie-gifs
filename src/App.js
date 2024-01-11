@@ -34,14 +34,14 @@ function App() {
                 },
             })
                 .then((res) => {
-                    // use if here
                     try {
                         const movieDataID = res.data.results[0].id;
                         setMovieID(movieDataID);
                         setTitle(res.data.results[0].title);
                     }
                     catch (err) {
-                        setMessage('No results, try another movie');
+                        // when the movie doesn't exist
+                        setMessage("We don't know that movie, try another");
                     }
                 }).catch(() => {
                     setMessage('Failed to fetch movie');
@@ -65,8 +65,8 @@ function App() {
                         const keywordNames = keywords.map(keyword => keyword.name);
                         setKeywords(keywordNames);
                     } else {
-                        // shows 'no results' when the movie exists but the keywords don't
-                        setMessage('No results, try another movie');
+                        // when the movie exists but the keywords don't
+                        setMessage("Sorry, we can't spoil that movie");
                     }
                 }).catch(() => {
                     setMessage('Failed to fetch keywords');
