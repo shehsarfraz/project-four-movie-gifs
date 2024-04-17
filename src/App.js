@@ -21,11 +21,10 @@ function App() {
             setMessage('Loading...');
             // empty array
             setGifUrls([]);
-
+            // searches movie results by name, takes first result and sets movie id
             axios({
-                url: 'https://api.themoviedb.org/3/search/movie?',
+                url: `/.netlify/functions/title-search?`,
                 params: {
-                    api_key: '9c9519dc449bbf790a84023525a11fe6',
                     query: `${searchValue}`,
                     language: 'en-US',
                     include_adult: 'false',
@@ -52,10 +51,11 @@ function App() {
     useEffect(() => {
 
         if (movieID) {
+            // finds movie by id, set by the search fetch
             axios({
-                url: `https://api.themoviedb.org/3/movie/${movieID}/keywords`,
+                url: `/.netlify/functions/movie-search?`,
                 params: {
-                    api_key: '9c9519dc449bbf790a84023525a11fe6',
+                    query: `${movieID}`,
                 },
             })
                 .then((res) => {
@@ -91,14 +91,15 @@ function App() {
             setRandomKeywords(randomKeywords);
         }
     }, [keywords]);
-
+    
     useEffect(() => {
         const fetchGifUrls = async () => {
             const urls = [];
             try {
                 for (const keyword of randomKeywords) {
+    
                     const res = await axios.get(
-                        `https://api.giphy.com/v1/gifs/search?api_key=eQ4TwuU0VsAbLctRXychU3MD9aPSRmtr&q=${keyword}&limit=1&offset=1&rating=g&lang=en`
+                        `/.netlify/functions/giphy-search?keyword=${keyword}&limit=1&offset=1&rating=g&lang=en`
                     );
                     const gifUrlsForKeyword = res.data.data;
                     urls.push(...gifUrlsForKeyword);
